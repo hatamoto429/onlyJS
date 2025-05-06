@@ -1,1 +1,1 @@
-This repo serves as a personalized reference cheatsheet and exercise space revolving around Fullstack Development with Front- and Backend Technologies with a focus on JavaScript, React & Vue.
+This repo serves as a comprehensive reference cheatsheet and exercise space that demonstrates the full workflow of JavaScript and its features - revolving around Fullstack Development with Front- and Backend Technologies and the focus on JavaScript, React & Vue.
