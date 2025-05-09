@@ -61,6 +61,4 @@ const person = {
     zip: 12345,
   },
 };
-console.log(person.address.city); // Boston
-
-// Access 
+console.log(person.address.city); // New York

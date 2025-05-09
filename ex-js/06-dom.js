@@ -2,17 +2,29 @@ const title = document.getElementById("title");
 const btn = document.getElementById("btn");
 const input = document.getElementById("input");
 
-// Changing text content
-title.textContent = "New Title";
+const firstDiv = document.querySelector("div"); // First matching element
+const allButtons = document.querySelectorAll("button"); // All matching elements
+console.log(allButtons);
 
-// Changing HTML content
+// Content Manipulation
+title.textContent = "New Title";
 btn.innerHTML = "<strong>Click Me!</strong>";
 
-// Adding event listeners
-btn.addEventListener("click", () => {
+// Style Manipulation
+title.style.color = "red";
+btn.style.backgroundColor = "yellow";
+
+// Event Handling
+btn.addEventListener("click", (e) => {
+  e.preventDefault();
   title.textContent = input.value;
-  input.value = ""; // Clear input
+  input.value = "";
 });
+
+// Classes 
+title.classList.add("highlight");
+title.classList.remove("highlight")
+
 
 // Changing styles
 title.style.color = "red";
@@ -22,7 +34,3 @@ btn.style.backgroundColor = "yellow";
 const newElement = document.createElement("p");
 newElement.textContent = "This is a new paragraph!";
 document.body.appendChild(newElement);
-
-// Querying elements with querySelector
-const firstDiv = document.querySelector("div");
-firstDiv.style.backgroundColor = "lightblue";
