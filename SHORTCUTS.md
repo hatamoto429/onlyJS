@@ -29,13 +29,14 @@ Quick reference for efficient coding in VSCode. ⭐️ denotes commonly used sho
 | Insert Line Below               | `Ctrl+Enter`       |
 | Insert Line Above               | `Ctrl+Shift+Enter` |
 | Join Lines                      | `Ctrl+J`           |
+| ⭐️ Toggle Comment Line          | `Ctrl+#`           |
 | ⭐️ Toggle Line Comment          | `Ctrl+K Ctrl+C`    |
 | ⭐️ Uncomment Line               | `Ctrl+K Ctrl+U`    |
 | Toggle Block Comment            | `Shift+Alt+A`      |
 | Indent/Outdent Line             | `Ctrl+] / Ctrl+[`  |
 | Format Document                 | `Shift+Alt+F`      |
 | Format Selection                | `Ctrl+K Ctrl+F`    |
-Rename      F2
+| Rename                          |  `F2`              |
 
 ---
 

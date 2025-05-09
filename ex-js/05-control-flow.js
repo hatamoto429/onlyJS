@@ -1,4 +1,4 @@
-// Conditional Statements
+// --- Conditional Statements
 
 if (condition) {
   // if true
@@ -23,7 +23,7 @@ switch (value) {
   // fallback execution
 }
 
-//Loops
+// --- Loops
 
 // For Loop
 for (let i = 0; i < 5; i++) {
@@ -44,7 +44,7 @@ do {
   j++;
 } while (j > 5);
 
-// Loop Helpers
+// --- Loop Helpers
 
 // For...Of (arrays, string)
 for (const char of "Hello") {
@@ -57,7 +57,7 @@ for (const key in obj) {
   console.log(key, obj[key]);
 }
 
-// Flow Control
+// --- Flow Control
 
 // Break
 for (let i; i < 10; i++) {

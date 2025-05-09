@@ -44,6 +44,8 @@ A comprehensive glossary of key JavaScript terms, concepts, and syntax for quick
 
 **arrow function** – A concise syntax using `=>`, does not have its own `this`, `arguments`, or `super`.
 
+**utility function** — A utility function is a small, reusable function designed to perform a specific task — often something general-purpose or commonly needed across a codebase.
+
 **callback** – A function passed into another function to be executed later.
 
 **closure** – A function that remembers its lexical scope even when executed outside that scope.

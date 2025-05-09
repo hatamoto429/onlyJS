@@ -75,8 +75,3 @@ const person = {
 person.sayHi();
 person.sayHiArrow();
 
-// Async Function
-async function asyncFunction() {
-  return [1, 2, 3];
-}
-asyncFunction().then((data) => console.log(data));
