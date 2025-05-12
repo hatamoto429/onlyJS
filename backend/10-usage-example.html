@@ -1,0 +1,147 @@
+// Usage Example - Fetching Data via Button Click & Updating Content via Button Click
+
+// ----------------------------------------------------------------------------------------------------------
+//  FRONTEND 
+// .html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Database CRUD Example</title>
+  <script>
+    // Function to fetch posts from the database and display them
+    async function fetchPosts() {
+      const response = await fetch('/api/posts');
+      const posts = await response.json();
+
+      // Display posts
+      const postsContainer = document.getElementById('posts-container');
+      postsContainer.innerHTML = ''; // Clear previous posts
+
+      posts.forEach(post => {
+        const postDiv = document.createElement('div');
+        postDiv.innerHTML = `<h3>${post.title}</h3><p>${post.content}</p>`;
+        postsContainer.appendChild(postDiv);
+      });
+    }
+
+    // Function to update a post when the form is submitted
+    async function updatePost(event) {
+      event.preventDefault();
+      
+      const postId = document.getElementById('post-id').value;
+      const address = document.getElementById('address').value;
+      
+      const response = await fetch('/api/update-address', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id: postId,
+          address: address
+        })
+      });
+
+      const result = await response.json();
+      alert(result.message);
+
+      // Optionally refresh the posts after updating
+      fetchPosts();
+    }
+  </script>
+</head>
+<body>
+  <h1>Database CRUD Operations</h1>
+
+  <!-- Button to fetch posts -->
+  <button onclick="fetchPosts()">Load Posts</button>
+
+  <!-- Container to display posts -->
+  <div id="posts-container"></div>
+
+  <!-- Form to update a post's address -->
+  <h2>Update Address</h2>
+  <form onsubmit="updatePost(event)">
+    <input type="number" id="post-id" placeholder="Post ID" required><br>
+    <input type="text" id="address" placeholder="New Address" required><br>
+    <button type="submit">Update Address</button>
+  </form>
+
+</body>
+</html>
+
+// ----------------------------------------------------------------------------------------------------------
+// BACKEND 
+// server.js
+const express = require('express');
+const { Pool } = require('pg');
+const cors = require('cors');
+require('dotenv').config(); // To load environment variables like DB URI
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+// Enable CORS for frontend communication
+app.use(cors());
+
+// Middleware to parse JSON request bodies
+app.use(express.json());
+
+// Setup PostgreSQL connection
+const pool = new Pool({
+  connectionString: process.env.PG_URI
+});
+
+// GET /api/posts: Fetch posts from the database
+app.get('/api/posts', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM posts');
+    res.json(result.rows); // Send posts as JSON response
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Failed to retrieve posts');
+  }
+});
+
+// POST /api/update-address: Update a post's address
+app.post('/api/update-address', async (req, res) => {
+  const { id, address } = req.body;
+
+  if (!id || !address) {
+    return res.status(400).send('Missing post ID or address');
+  }
+
+  try {
+    const result = await pool.query(
+      'UPDATE posts SET content = $1 WHERE id = $2 RETURNING *',
+      [address, id]
+    );
+
+    if (result.rows.length > 0) {
+      res.json({ message: 'Post updated successfully!' });
+    } else {
+      res.status(404).send('Post not found');
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Failed to update post');
+  }
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
+
+// ----------------------------------------------------------------------------------------------------------
+// ENV 
+// .env
+PG_URI=your_postgres_database_uri_here
+
+// ----------------------------------------------------------------------------------------------------------
+// RUN THE APPLICATION
+// bash
+node server.js
+run the HTML in the browser
